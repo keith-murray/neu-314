@@ -1,0 +1,240 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,      % Color of internal links (sections, pages)
+    urlcolor=blue,        % Color of web URLs
+    citecolor=green       % Color of citations
+}
+
+% ---- Fill these in ----
+\newcommand{\courseName}{NEU 314}
+\newcommand{\taName}{Keith Murray}
+\newcommand{\sectionInfo}{Precept B01}
+% ------------------------
+
+\title{Precept 5: Warm Up Exercises}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\courseName}
+\chead{\sectionInfo}
+\rhead{\today}
+\cfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{Exercises}
+\subsection*{Problem 1}
+Let $\vec{u}=\begin{bmatrix}
+    1\\ 2
+\end{bmatrix}$ and $\vec{v}=\begin{bmatrix}
+    3\\ -1
+\end{bmatrix}$, and define $A=\vec{u}\vec{v}^\top$.
+\begin{enumerate}
+    \item[(a)] Compute $A$ and $\det A$.
+    \item[(b)] What is the rank of $A$? How many non-zero singular values does it have?
+    \item[(c)] Without computing the full SVD, what is the condition number of $A$?
+    \item[(d)] Find a non-zero vector in the null space of $A$. 
+\end{enumerate}
+
+\subsection*{Problem 2}
+Someone hands you the SVD $A=USV^\top$, where
+\[
+U=\frac{1}{\sqrt{2}}\begin{bmatrix}
+    1 & -1 \\ 1 & 1
+\end{bmatrix},\qquad S=\begin{bmatrix}
+    4 & 0 \\ 0 & \frac{1}{2}
+\end{bmatrix}, \qquad V^\top = \begin{bmatrix}
+    0 & 1 \\ 1 & 0 
+\end{bmatrix}
+\]
+\begin{enumerate}
+    \item[(a)] Compute $\det U$ and $\det V^\top$. What kinds of transformations are $U$ and $V^\top$? Rotations or reflections?
+    \item[(b)] Compute $\det A$ \textbf{without} multiplying out $A$.
+    \item[(c)] A unit square is transformed by $A$. What is the area of the resulting shape?
+    \item[(d)] Compute $\det\left(A^{-1}\right)$ and $\det \left(A^\top A\right)$.
+    \item[(e)] What is the condition number of $A$?
+\end{enumerate}
+
+\section*{Solution}
+\subsection*{Problem 1}
+\subsubsection*{Subproblem 1.a}
+$A$ is an outer product, and we can think of the outer product as 
+\[
+A = \begin{bmatrix}
+    \mid & \mid \\
+    v_1\vec{u} & v_2\vec{u}\\
+    \mid & \mid \\
+\end{bmatrix}
+\]
+where each column is the vector $\vec{u}$ scalar multiplied by the corresponding component of the vector $\vec{v}$. Hence, the matrix $A$ is 
+\[
+A = \begin{bmatrix}
+    3 & -1\\ 6 & -2
+\end{bmatrix}
+\]
+Remember that the formula for the determinant of a $2\times 2$ matrix is 
+\[
+\det A = ad - bc
+\]
+where 
+\[
+A = \begin{bmatrix}
+    a & b \\ c & d
+\end{bmatrix}
+\]
+Plugging our particular components of $A=\vec{u}\vec{v}^\top$, we have 
+\[
+\det A = 3\left(-2\right) - \left(-1\right)6 = -6 + 6 = 0
+\]
+
+\subsubsection*{Subproblem 1.b}
+As we've seen before, the rank of a matrix formed by an outer product is just $1$. This follows because there is one linearly independent vector in the column space of $A$, namely the vector $\vec{u}$.
+
+Our matrix $A$ has 1 non-zero singular value. You should ask yourself, ``Why is this?'' Let's think back to the SVD. We can write the SVD as 
+\[
+A = USV^\top
+\]
+We know that $U,V$ are orthogonal matrices\footnote{Just as a reminder, all the columns of an orthogonal matrix are linearly independent, hence the rank of an orthogonal matrix is always equal to the number of columns. In this case, $U,V$ are $2\times 2$ matrices, so there are two columns, implying they are rank $2$.}; hence, the rank of $U,V$ are both rank $2$. But we know that the rank of $A$ is 1, so where does the reduction in the rank of the SVD come from? It comes from $S$!
+
+In fact, the rank of $A$ always equals the rank of $S$ in the SVD. \textbf{You should convince yourself of this.} Now we know that the rank of $S$ is equal to 1. Given that $S$ is a diagonal matrix, this implies that:
+\begin{itemize}
+    \item one of the columns has a non-zero vector
+    \item the other column is the zero vector $\vec{0}$
+\end{itemize}
+Therefore, there is one non-zero singular value and one zero singular value.
+
+Thinking back to \textbf{Subproblem 1.a}, we computed the determinant of $A$ as 0. In class, we saw that the determinant of $A$ is also the product of all the singular values. Given we have one non-zero and one zero singular value, their product is equal to $0$, giving us a nice sanity check!
+
+\subsubsection*{Subproblem 1.c}
+Following from our logic in \textbf{Subproblem 1.b}, $A$ has two singular values:
+\begin{enumerate}
+    \item A non-zero singular values $\sigma_1$
+    \item A zero singular value $\sigma_2=0$
+\end{enumerate}
+We compute the condition number as the largest singular value divided by the smallest singular value, which in our case is 
+\[
+\frac{\sigma_1}{\sigma_2}=\frac{\sigma_1}{0}=\infty
+\]
+Notice that it does not matter what $\sigma_1$ is equal to!
+
+\subsubsection*{Subproblem 1.d}
+Given that we know the rank of $A$ is 1, we can infer that the dimension of the null space is 1, hence there are vectors that live there. To find them, let's suppose we have some arbitrary vector $\vec{x}=\begin{bmatrix}
+    x_1 & x_2
+\end{bmatrix}^\top$ that we want to lie in the null space. Now we can rewrite the matrix multiplication $A\vec{x}=0$ as 
+\[
+A\vec{x}=\vec{u}\vec{v}^\top\vec{x}=0
+\]
+where we can see that $\vec{v}^\top\vec{x}=0$ implies $A\vec{x}=0$. Therefore, we just need to find a vector orthogonal to $\vec{v}$. Explicitly writing out the components of $\vec{v}^\top\vec{x}=0$, we get
+\begin{gather*}
+    \vec{v}^\top\vec{x}=0\\
+    \begin{bmatrix}
+    3 & -1
+\end{bmatrix}\begin{bmatrix}
+    x_1 \\ x_2
+\end{bmatrix}=0\\
+3x_1-x_2 = 0\\
+x_2=3x_1
+\end{gather*}
+Now, all we have to do is to pick an arbitrary value of $x_1$. Let's say $x_1=1$. Via our expression above, it follows that $x_2=3$. Therefore, our vector $\vec{x}$ is 
+\[
+\vec{x}=\begin{bmatrix}
+    1 \\ 3
+\end{bmatrix}
+\]
+and, by construction, it lies in the null space. Do double check!
+
+\subsection*{Problem 2}
+\subsubsection*{Subproblem 2.a}
+Using our formula for the determinant
+\[
+\det A = ad - bc
+\]
+we have 
+\[
+\det U = \left(\frac{1}{\sqrt{2}}\right)\cdot  \left(\frac{1}{\sqrt{2}}\right)-  \left(-\frac{1}{\sqrt{2}}\right)\cdot \left(\frac{1}{\sqrt{2}}\right)=\frac{1}{2}+\frac{1}{2}=1
+\]
+and 
+\[
+\det V^\top = 0\cdot 0 - 1\cdot 1 = -1
+\]
+A $\det U =1$ implies that $U$ is a rotation and a $\det V^\top=-1$ implies $V^\top$ is a reflection.
+
+\subsubsection*{Subproblem 2.b}
+From class, we know that
+\begin{align*}
+    \det A &= \det \left(USV^\top\right)\\
+    &=\det U \cdot \det S \cdot \det V^\top
+\end{align*}
+We already know $\det U$ and $\det V^\top$, so we just need to figure out $\det S$. Luckily, $S$ is a diagonal matrix, so the determinant of $S$ is the product of its diagonal components 
+\[
+\det S = 4\cdot \frac{1}{2} = 2
+\]
+Combining everything, we have 
+\[
+\det A = \det U \cdot \det S \cdot \det V^\top = 1 \cdot 2 \cdot \left(-1\right) = -2
+\]
+
+\subsubsection*{Subproblem 2.c}
+Recall from class that the determinant of a matrix is a measure of how much the volume is increased or decreased by applying that matrix to a shape\footnote{It's okay if the idea of multiplying a shape by a matrix is unclear. Everyone in the linear algebra world becomes comfortable with this idea by watching this \href{https://youtu.be/Ip3X9LOh2dk?si=zCiJtCJSDO9g8CV6}{3blue1brown video}.}. For this problem, the shape is the unit square with area 1. Upon applying our matrix $A$ to the square, the area is increased by $\lvert\det A\rvert=2$. Hence, the area of the resulting shape is $2\cdot 1 = 2$.
+
+\subsubsection*{Subproblem 2.d}
+Recall from class that $A^{-1}$ can be computed from the SVD as 
+\[
+A^{-1} = VS^{-1}U^\top
+\]
+Hence, 
+\[
+\det \left(A^{-1}\right) = \det V \cdot \det S^{-1} \cdot \det U^\top
+\]
+You should convince yourself that 
+\[
+\det V = \det V^\top \qquad\text{and}\qquad \det U = \det U^\top
+\]
+Now all we need to do is to compute $\det S^{-1}$, which is just 
+\[
+\det S^{-1} = \frac{1}{4}\cdot \frac{1}{1/2} = \frac{1}{4}\cdot 2 = \frac{1}{2}
+\]
+Putting it all together, we have 
+\[
+\det \left(A^{-1}\right) = \det V \cdot \det S^{-1} \cdot \det U^\top=\left(-1\right)\cdot \frac{1}{2}\cdot 1 = -\frac{1}{2}
+\]
+Notice that we miraculously have 
+\[
+\det \left(A^{-1}\right)  = \frac{1}{\det A}
+\]
+which is always true for an invertible matrix $A$. Pretty cool, right?
+
+Recall from class, and the quiz, that $A^\top A$ can be written via the SVD of $A$ as 
+\[
+A^\top A = V S^2 V^\top
+\]
+It now follows that we can write the determinant of $A^\top A$ as 
+\begin{align*}
+    \det\left(A^\top A\right) &= \det\left(V S^2 V^\top\right)\\
+    &= \det V \cdot \det S \cdot \det S \cdot \det V^\top\\
+    &= -1 \cdot 2 \cdot 2 \cdot \left(-1\right) = 4
+\end{align*}
+Notice that we have another miracle. We can write 
+\[
+\det\left(A^\top A\right) = \left(\det A\right)^2
+\]
+which is always true for any square matrix $A$. Even cooler, right?
+
+\subsubsection*{Subproblem 2.e}
+The condition number is just the largest singular value divided by the smallest singular value. Hence, it is 
+\[
+\frac{4}{1/2}=8
+\]
+
+
+\end{document}

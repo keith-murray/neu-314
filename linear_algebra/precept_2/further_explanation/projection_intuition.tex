@@ -1,0 +1,101 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{microtype}
+\usepackage{parskip}
+
+\geometry{margin=1in}
+
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{\textbf{Why Does $\operatorname{proj}_{u_1} v + \operatorname{proj}_{u_2} v$ Require $u_1 \cdot u_2 = 0$?}}
+\author{NEU 314}
+\date{}
+
+\begin{document}
+\maketitle
+
+Recall that we defined the projection of $v$ onto $u$ as
+\[
+    \proj_u v = \frac{v \cdot u}{u \cdot u}\, u.
+\]
+When $\{u_1, u_2\}$ is an \emph{orthogonal} basis for a subspace, we can recover $v$ exactly by summing its projections:
+\[
+    v = \proj_{u_1} v + \proj_{u_2} v.
+\]
+A natural question is: what goes wrong if $u_1 \cdot u_2 \neq 0$?
+
+\section*{The Algebraic Reason}
+
+Suppose we want to write $v = c_1 w_1 + c_2 w_2$ for some vectors $w_1, w_2$ and unknown scalars $c_1, c_2$.
+To find $c_1$, dot both sides with $w_1$:
+\[
+    v \cdot w_1 = c_1 (w_1 \cdot w_1) + c_2 (w_2 \cdot w_1).
+\]
+\begin{itemize}
+    \item If $w_1 \cdot w_2 = 0$: the second term vanishes, and we get $c_1 = \dfrac{v \cdot w_1}{w_1 \cdot w_1}$ directly -- exactly the projection formula.
+    \item If $w_1 \cdot w_2 \neq 0$: the coefficient $c_1$ depends on $c_2$ as well. The two are \emph{coupled}, and we cannot read them off independently using the projection formula.
+\end{itemize}
+Using the projection formula when $w_1 \cdot w_2 \neq 0$ silently ignores the coupling term, which is the source of the error.
+
+\section*{A Concrete Example}
+
+Let $w_1 = (1, 0)$ and $w_2 = (1, 1)$, so $w_1 \cdot w_2 = 1 \neq 0$.
+Take $v = (1, 0)$: this vector points purely in the $x$-direction.
+The correct decomposition should assign all of $v$ to $w_1$ and nothing to $w_2$.
+
+Computing the projections:
+\[
+    \proj_{w_1} v
+    = \frac{v \cdot w_1}{w_1 \cdot w_1}\, w_1
+    = \frac{1}{1}(1, 0)
+    = (1, 0),
+\]
+\[
+    \proj_{w_2} v
+    = \frac{v \cdot w_2}{w_2 \cdot w_2}\, w_2
+    = \frac{1}{2}(1, 1)
+    = \left(\tfrac{1}{2},\, \tfrac{1}{2}\right).
+\]
+Their sum is
+\[
+    \proj_{w_1} v + \proj_{w_2} v
+    = \left(\tfrac{3}{2},\, \tfrac{1}{2}\right)
+    \neq (1, 0) = v.
+\]
+The sum has acquired a $y$-component even though $v$ lies entirely on the $x$-axis!
+The reason: $w_2 = (1,1)$ contains an $x$-component, so projecting $v$ onto $w_2$ \emph{re-captures} part of the $x$-direction that was already counted in $\proj_{w_1} v$. The $x$-direction is counted twice.
+
+\section*{Gram--Schmidt Removes the Overlap}
+
+Starting from the same pair $\{w_1, w_2\}$, Gram--Schmidt produces an orthogonal pair spanning the same subspace.
+
+\textbf{Step 1.} Keep $w_1$: set $u_1 = (1, 0)$.
+
+\textbf{Step 2.} Subtract from $w_2$ its component along $u_1$:
+\[
+    u_2
+    = w_2 - \proj_{u_1} w_2
+    = (1, 1) - \frac{(1,1)\cdot(1,0)}{(1,0)\cdot(1,0)}(1,0)
+    = (1,1) - (1,0)
+    = (0, 1).
+\]
+
+Now $u_1 \cdot u_2 = 0$. Applying the projection formula to the same $v = (1,0)$:
+\[
+    \proj_{u_1} v + \proj_{u_2} v
+    = \frac{1}{1}(1,0) + \frac{0}{1}(0,1)
+    = (1,0)
+    = v. \quad \checkmark
+\]
+The projection onto $u_2 = (0,1)$ correctly contributes zero: $v$ has no $y$-component,
+and $u_2$ measures \emph{only} the $y$-direction.
+Gram--Schmidt stripped the $x$-part out of $w_2$, ensuring that $u_1$ and $u_2$ each measure something genuinely independent.
+
+\section*{Summary}
+
+Orthogonality ($u_1 \cdot u_2 = 0$) guarantees that each basis vector measures a direction \emph{no other basis vector can see}.
+When this fails, the projection formula double-counts the shared directions,
+and the sum of projections no longer reconstructs $v$.
+\end{document}

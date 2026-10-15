@@ -1,0 +1,72 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+
+% ---- Fill these in ----
+\newcommand{\courseName}{NEU 314}
+\newcommand{\taName}{Keith Murray}
+\newcommand{\sectionInfo}{Precept B01}
+% ------------------------
+
+\title{Precept 2: Warm Up Exercise}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\courseName}
+\chead{\sectionInfo}
+\rhead{\today}
+\cfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{Problem}
+
+Consider the following vectors:
+\[
+\vec{v}=\begin{bmatrix}
+    2\\2\\0
+\end{bmatrix},\qquad\vec{u}_1=\begin{bmatrix}
+    1\\2\\3
+\end{bmatrix},\qquad\vec{u}_2=\begin{bmatrix}
+    1\\1\\-1
+\end{bmatrix}
+\]
+Let's answer the following questions:
+\begin{enumerate}
+    \item What is the relationship between $\vec{u}_1$ and $\vec{u}_2$?
+    \item What is the dimension of the subspace spanned by $\vec{u}_1$ and $\vec{u}_2$?
+    \item How would you project vector $\vec{v}$ on to the subspace spanned by $\vec{u}_1$ and $\vec{u}_2$?
+\end{enumerate}
+Remember the formula for vector projection is $\operatorname{proj}_{\vec{u}}\left(\vec{v}\right)=\frac{\vec{v}\cdot \vec{u}}{\vec{u}\cdot \vec{u}}\vec{u}$
+
+\section*{Solution}
+\subsection*{Question 1}
+$\vec{u}_1$ and $\vec{u}_2$ are orthogonal because
+\[
+\vec{u}_1\cdot \vec{u}_2 = 1\cdot 1 + 2\cdot 1 + 3\cdot\left(-1\right)=3-3=0
+\]
+
+\subsection*{Question 2}
+Note that nonzero orthogonal vectors are automatically linearly independent. Hence, the subspace is a 2-dimensional subspace because there are two vectors and they are linearly independent.
+
+\subsection*{Question 3}
+
+Because $\vec{u}_1$ and $\vec{u}_2$ are orthogonal, we can use the vector projection formula on both $\vec{v}$ on to $\vec{u}_1$ and $\vec{v}$ on to $\vec{u}_2$, and then add the resulting projections. Mathematically, this looks like
+\[
+\frac{\vec{v}\cdot \vec{u}_1}{\vec{u}_1\cdot \vec{u}_1}\vec{u}_1 + \frac{\vec{v}\cdot \vec{u}_2}{\vec{u}_2\cdot \vec{u}_2}\vec{u}_2
+\]
+which evaluates to 
+\[
+\frac{3}{7}\vec{u}_1 + \frac{4}{3}\vec{u}_2=\frac{1}{21}\begin{bmatrix}
+    37\\46\\-1
+\end{bmatrix}
+\]
+Note that this would not work if $\vec{u}_1$ and $\vec{u}_2$ were not orthogonal.
+
+
+\end{document}

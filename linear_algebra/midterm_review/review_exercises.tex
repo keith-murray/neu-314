@@ -1,0 +1,230 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,      % Color of internal links (sections, pages)
+    urlcolor=blue,        % Color of web URLs
+    citecolor=green       % Color of citations
+}
+\newcommand{\rotvert}{\rotatebox[origin=c]{90}{$\vert$}}
+
+% ---- Fill these in ----
+\newcommand{\courseName}{NEU 314}
+\newcommand{\taName}{Keith Murray}
+\newcommand{\sectionInfo}{Precept B01}
+% ------------------------
+
+\title{Precept 6: Review Exercises}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\courseName}
+\chead{\sectionInfo}
+\rhead{\today}
+\cfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{Exercises Part 1}
+\subsection*{Problem 1}
+Let $\vec{u}=\begin{bmatrix}
+    1\\ 2
+\end{bmatrix}$ and $\vec{v}=\begin{bmatrix}
+    3\\ -1
+\end{bmatrix}$.
+\begin{enumerate}
+    \item[(a)] What is $\left\|\vec{v}\right\|$?
+    \item[(b)] What is $\vec{u}+3\vec{v}$?
+    \item[(c)] What is the dot product $\vec{u}\cdot \vec{v}$? What does this tell us about $\vec{u}$ and $\vec{v}$?
+    \item[(d)] Write a unit vector pointing in the same direction as $\vec{u}$.
+    \item[(e)] Project the vector $\vec{v}$ on to $\vec{u}$.
+\end{enumerate}
+
+\subsection*{Problem 2}
+\begin{enumerate}
+    \item[(a)] What are the 3 cone types? Give their name and corresponding colors.
+    \item[(b)] Why is the response from a single cone ambiguous?
+    \item[(c)] What does it mean for two colors to be metamers? What is the linear algebra interpretation?
+    \item[(d)] Mantis shrimp have 12 different cones. Suppose we discretize an illuminant into 21 bins. How many directions in the illuminant power spectrum are invisible to these shrimp? How many are invisible to us?
+    \item[(e)] What caused the ``dress incident''?
+\end{enumerate}
+
+\clearpage
+
+\section*{Solutions Part 1}
+\subsection*{Problem 1}
+Let $\vec{u}=\begin{bmatrix}
+    1\\ 2
+\end{bmatrix}$ and $\vec{v}=\begin{bmatrix}
+    3\\ -1
+\end{bmatrix}$.
+\begin{enumerate}
+    \item[(a)] $\left\|\vec{v}\right\| = \sqrt{3^2 + \left(-1\right)^2}=\sqrt{9+1}=\sqrt{10}$?
+    \item[(b)] $\vec{u}+3\vec{v}= \begin{bmatrix}1\\ 2\end{bmatrix}+3\begin{bmatrix}3\\ -1\end{bmatrix}= \begin{bmatrix}1\\ 2\end{bmatrix}+\begin{bmatrix}9\\ -3\end{bmatrix}=\begin{bmatrix}10\\ -1\end{bmatrix}$
+    \item[(c)] $\vec{u}\cdot \vec{v}=1\cdot 3 + 2\cdot \left(-1\right)=3-2=1$. This tells us that $\vec{u}$ and $\vec{v}$ are \textbf{not} orthogonal.
+    \item[(d)] Write a unit vector pointing in the same direction as $\vec{u}$. First, we need to compute $\left\|\vec{u}\right\| = \sqrt{1^2+2^2}=\sqrt{1+4}=\sqrt{5}$. Then our unit vector is $\begin{bmatrix}\frac{1}{\sqrt{5}}\\ \frac{2}{\sqrt{5}}\end{bmatrix}$
+    \item[(e)] Let's remember our formula for projection $\operatorname{proj}_{\vec{u}}\vec{v}=\frac{\vec{v}\cdot \vec{u}}{\vec{u}\cdot \vec{u}}\vec{u}$. Hence, \[ \operatorname{proj}_{\vec{u}}\vec{v}=\frac{1}{5} \begin{bmatrix}
+    1\\ 2
+\end{bmatrix}= \begin{bmatrix}
+    1/5 \\ 2/5
+\end{bmatrix} \]
+\end{enumerate}
+
+\subsection*{Problem 2}
+\begin{enumerate}
+    \item[(a)] `S' cone for `short', which corresponds to blue. `M' cone for `medium', which corresponds to green. `L' cone for `long', which corresponds to red.
+    \item[(b)] Mathematically, a cone response is given by a dot product with the cone absorption spectrum. There are many different illuminant spectrum that could cause the same dot product output with cone.
+    \item[(c)] Two colors are metamers if they are indistinguishable. The linear algebra interpretation is that the only difference between the illuminant spectrum of these two colors lies in the null space of the cone absorption spectra. \[ C\vec{x}_1 = C\vec{x}_2\quad \implies \quad C(\vec{x}_1-\vec{x}_2)=0 \]
+    \item[(d)] There are $21-12=9$ directions in the illuminant power spectrum that are invisible to these poor shrimp. However, there are $21-3=18$ directions that are invisible to us!
+    \item[(e)] The perception of some color depends on an inference about the light source used to illuminate the color. If the light source is ambiguous, this can cause for different interpretations of the color.
+\end{enumerate}
+
+\clearpage
+
+\section*{Exercises Part 2}
+\subsection*{Problem 1}
+Consider the matrices $A$ and vectors $\vec{u},\vec{v}$.
+\begin{enumerate}
+    \item[(a)] Suppose we want to compute $A\vec{v}$ via the ``dot product'' perspective. What does that mean?
+    \item[(b)] Now suppose we want to compute $A\vec{v}$ via the ``linear combination'' perspective. What does that mean?
+    \item[(c)] Are the two perspectives above equivalent?
+    \item[(d)] What does $\vec{u}^\top\vec{v}$ mean? What does it look like?
+    \item[(e)] What does $\vec{u}\vec{v}^\top$ mean? What does it look like?
+\end{enumerate}
+
+\subsection*{Problem 2}
+Consider the matrices $A,B$ and the orthogonal matrix $Q$.
+\begin{enumerate}
+    \item[(a)] Suppose we want to compute $AB=C$. What are the two different perspectives.
+    \item[(b)] Why does $Q^\top Q = I$? (\textit{Hint}: Think of one of the perspectives above.)
+\end{enumerate}
+
+\clearpage
+
+\section*{Solutions Part 2}
+\subsection*{Problem 1}
+Consider the matrices $A$ and vectors $\vec{u},\vec{v}$.
+\begin{enumerate}
+    \item[(a)] Let $A=\begin{bmatrix} \rotvert & \vec{a}_1 & \rotvert \\  & \vdots &  \\ \rotvert & \vec{a}_n & \rotvert \end{bmatrix}$ and $\vec{v}= \begin{bmatrix} \mid \\ \vec{v} \\ \mid \end{bmatrix}$. Then \[ A\vec{v}= \begin{bmatrix} \vec{a}_1\cdot \vec{v} \\ \vdots \\ \vec{a}_n\cdot \vec{v} \end{bmatrix} \]
+    \item[(b)] Let $A=\begin{bmatrix} \mid &  & \mid \\ \vec{a}_1 & \cdots & \vec{a}_m \\ \mid &  & \mid \end{bmatrix}$ and $\vec{v}= \begin{bmatrix} v_1 \\ \vdots \\ v_m \end{bmatrix}$. Then \[ A\vec{v}= v_1\vec{a}_1 + \cdots + v_m\vec{a}_m \]
+    \item[(c)] Of course!
+    \item[(d)] Let $\vec{u}= \begin{bmatrix} u_1 \\ \vdots \\ u_n \end{bmatrix}$ and $\vec{v}= \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}$ (they must have the same length). Then $\vec{u}^\top$ is a row vector, and \[ \vec{u}^\top\vec{v}= \begin{bmatrix} u_1 & \cdots & u_n \end{bmatrix} \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix} = u_1v_1 + \cdots + u_nv_n = \vec{u}\cdot\vec{v}. \] This is the \emph{inner product}: a $(1\times n)(n\times 1)$ product, so the result is a $1\times 1$ matrix, i.e., a scalar.
+    \item[(e)] Let $\vec{u}= \begin{bmatrix} u_1 \\ \vdots \\ u_m \end{bmatrix}$ and $\vec{v}= \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}$ (they can have different lengths). Then \[ \vec{u}\vec{v}^\top= \begin{bmatrix} u_1 \\ \vdots \\ u_m \end{bmatrix} \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix} = \begin{bmatrix} u_1v_1 & \cdots & u_1v_n \\ \vdots & \ddots & \vdots \\ u_mv_1 & \cdots & u_mv_n \end{bmatrix}. \] This is the \emph{outer product}: a $(m\times 1)(1\times n)$ product, so the result is an $m\times n$ matrix with $(i,j)$ entry $u_iv_j$. Viewed by columns or by rows, \[ \vec{u}\vec{v}^\top = \begin{bmatrix} \mid &  & \mid \\ v_1\vec{u} & \cdots & v_n\vec{u} \\ \mid &  & \mid \end{bmatrix} = \begin{bmatrix} \rotvert & u_1\vec{v} & \rotvert \\  & \vdots &  \\ \rotvert & u_m\vec{v} & \rotvert \end{bmatrix}. \] Every column is a multiple of $\vec{u}$ and every row is a multiple of $\vec{v}$, so (if $\vec{u},\vec{v}\neq\vec{0}$) $\vec{u}\vec{v}^\top$ has rank 1.
+\end{enumerate}
+
+\subsection*{Problem 2}
+\begin{enumerate}
+    \item[(a)] The two different views are the ``column'' view and the ``dot product'' view. In the column view, we take a column perspective on $B$ and write \[ AB=A\begin{bmatrix} \mid &  & \mid \\ \vec{b}_1 & \cdots & \vec{b}_m \\ \mid &  & \mid \end{bmatrix}= \begin{bmatrix} \mid &  & \mid \\ A\vec{b}_1 & \cdots & A\vec{b}_m \\ \mid &  & \mid \end{bmatrix}=C \] where each column of $C$ is the corresponding column of $B$ matrix multiplied by $A$. In the ``dot product'' view, we take a row perspective on $A$ and a column perspective on $B$ to write \[ AB = \begin{bmatrix} \rotvert & \vec{a}_1 & \rotvert \\  & \vdots &  \\ \rotvert & \vec{a}_n & \rotvert \end{bmatrix}\begin{bmatrix} \mid &  & \mid \\ \vec{b}_1 & \cdots & \vec{b}_m \\ \mid &  & \mid \end{bmatrix}= \begin{bmatrix} \vec{a}_1\cdot \vec{b}_1 & \cdots & \vec{a}_1\cdot \vec{b}_m \\ \vdots & \ddots & \vdots \\ \vec{a}_n\cdot \vec{b}_1 & \cdots & \vec{a}_n\cdot \vec{b}_m \end{bmatrix} \]
+    \item[(b)] Remember that for the rows of an orthogonal matrix $q_1,\ldots,q_m$, we have $q_j\cdot q_j = 1$ and $q_j\cdot q_i = 0$ where $j\neq 1$. Taking the ``dot product'' view of matrix multiplication, the expression $Q^\top Q$ becomes \[ Q^\top Q = \begin{bmatrix} \rotvert & \vec{q}_1 & \rotvert \\  & \vdots &  \\ \rotvert & \vec{q}_m & \rotvert \end{bmatrix}\begin{bmatrix} \mid &  & \mid \\ \vec{q}_1 & \cdots & \vec{q}_m \\ \mid &  & \mid \end{bmatrix} = \begin{bmatrix} \vec{q}_1\cdot \vec{q}_1 & \cdots & \vec{q}_1\cdot \vec{q}_m \\ \vdots & \ddots & \vdots \\ \vec{q}_m\cdot \vec{q}_1 & \cdots & \vec{q}_m\cdot \vec{q}_m \end{bmatrix} = \begin{bmatrix} 1 & \cdots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \cdots & 1 \end{bmatrix} = I \]
+\end{enumerate}
+
+
+\clearpage
+
+\section*{Exercises Part 3}
+\subsection*{Problem 1}
+Let $A=\begin{bmatrix}
+    1 & 0 & 1\\ 1 & 0 & -1
+\end{bmatrix}$, $\vec{x}_1=\begin{bmatrix} 3\\ 2 \\ 1\end{bmatrix}$, and $\vec{x}_2=\begin{bmatrix} 0\\ 1 \\ 0 \end{bmatrix}$.
+\begin{enumerate}
+    \item[(a)] What does it mean for a vector to lie in the null space of a matrix?
+    \item[(b)] Which vector, $\vec{x}_1$ or $\vec{x}_2$, lies in the null space of $A$?
+    \item[(c)] What is the dimension of the row space of $A$? What is the rank of $A$?
+    \item[(d)] Find a set of vectors that span the column space of $A$. 
+    \item[(e)] What is the dimension of the null space of $A$? Find a vector that spans the null space of $A$.
+    \item[(f)] Write $\vec{x}_1$ as the sum of a vector in the row space of $A$ and a vector in the null space of $A$.
+    \item[(g)] Write the portion of $\vec{x}_1$ that lies in the row space of $A$ as a linear combination of the rows of $A$.
+\end{enumerate}
+
+\subsection*{Problem 2}
+\begin{enumerate}
+    \item[(a)] Why does preparatory neural activity in the motor cortex fail to generate movement?
+    \item[(b)] Draw a simplified schematic of the joint activity of two neurons during the preparatory and go periods of a reaching task for left and right reaching trials. Label the row and null spaces.
+    \item[(c)] Draw the firing rates over time for each of the two neurons.
+    \item[(d)] Draw the activity in the row and null spaces over time.
+\end{enumerate}
+
+\clearpage
+
+\section*{Solutions Part 3}
+\subsection*{Problem 1}
+Let $A=\begin{bmatrix}
+    1 & 0 & 1\\ 1 & 0 & -1
+\end{bmatrix}$, $\vec{x}_1=\begin{bmatrix} 3\\ 2 \\ 1\end{bmatrix}$, and $\vec{x}_2=\begin{bmatrix} 0\\ 1 \\ 0 \end{bmatrix}$.
+\begin{enumerate}
+    \item[(a)] There are two meanings: 1) the matrix-vector multiplication is the zero vector, 2) the vector is orthogonal to each row vector.
+    \item[(b)] Vector $\vec{x}_2$ lies in the null space since \[ A\vec{x}_1 = \begin{bmatrix}
+    1 & 0 & 1\\ 1 & 0 & -1
+\end{bmatrix}\begin{bmatrix} 3 \\ 2 \\ 1\end{bmatrix} = \begin{bmatrix} 3 + 0 +  1\\ 3 + 0 -1 \end{bmatrix} = \begin{bmatrix} 4\\ 2 \end{bmatrix}\qquad \text{and}\qquad A\vec{x}_2 = \begin{bmatrix}
+    1 & 0 & 1\\ 1 & 0 & -1
+\end{bmatrix}\begin{bmatrix} 0\\ 1 \\ 0\end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \]
+    \item[(c)] There are two rows and they are both linearly independent. Hence, the dimension of the row space is 2. This means the rank of $A$ is 2.
+    \item[(d)] From the previous question, we know that the the dimension of the column space is 2. Looking at the matrix $A$, it's clear that $\begin{bmatrix} 1\\1 \end{bmatrix},\begin{bmatrix} 1\\-1 \end{bmatrix}$ span the column space.
+    \item[(e)] From the rank-nullity theorem, the dimension of the null space of $A$ is $3-2=1$. Lucky for us, we already know that $\vec{x}_2$ lies in the null space. Hence, it spans the null space.
+    \item[(f)] $\vec{x}_1=\begin{bmatrix} 3\\ 0 \\ 1\end{bmatrix} + \begin{bmatrix} 0 \\ 2 \\ 0 \end{bmatrix}$ where $\begin{bmatrix} 3\\ 0 \\ 1\end{bmatrix}$ is in the row space and $\begin{bmatrix} 0 \\ 2 \\ 0 \end{bmatrix}$ is in the null space.
+    \item[(g)] $\begin{bmatrix} 3\\ 0 \\ 1\end{bmatrix}= 2\begin{bmatrix} 1\\ 0 \\ 1\end{bmatrix} + \begin{bmatrix} 1\\ 0 \\ -1\end{bmatrix}$ where $\begin{bmatrix} 1\\ 0 \\ 1\end{bmatrix}$ is the first row and $\begin{bmatrix} 1\\ 0 \\ -1\end{bmatrix}$ is the second row.
+\end{enumerate}
+
+\subsection*{Problem 2}
+\begin{enumerate}
+    \item[(a)] Because it lies in the null space!
+    \item[(b)-(d)] Look at the slides.
+\end{enumerate}
+
+\clearpage
+
+\section*{Exercises Part 4}
+\subsection*{Problem 1}
+Suppose the matrix $A$ has an SVD of $A=USV^\top$
+\begin{enumerate}
+    \item[(a)] What is the SVD of $A^\top$?
+    \item[(b)] What is the SVD of $A^{-1}$? When does $A^{-1}$ not exist?
+    \item[(c)] What is the SVD of $A^\top A$?
+    \item[(d)] What is the PCA of $A$? (\textit{Hint}: It should be really easy to compute.)
+    \item[(e)] Suppose $\vec{v}_2$ and $\vec{v}_3$ are the second and third right singular vectors. What does $A\left(\vec{v}_2+\vec{v}_3\right)$ evaluate to? (\textit{Hint}: There are two ways to do this.)
+    \item[(f)] Write the best rank 4 approximation to $A$.
+    \item[(g)] Suppose $\vec{u}_2$ is the second left singular vector. What is $\vec{u}^\top_2A\vec{v}_3$?
+\end{enumerate}
+
+\subsection*{Problem 2}
+\begin{enumerate}
+    \item[(a)] What is an eigenvector? What is an eigenvalue?
+    \item[(b)] Are vectors in the null space of the matrix eigenvectors?
+    \item[(c)] How do eigenvectors connect to PCA and SVD?
+    \item[(d)] Why do we subtract the mean from our data before performing PCA?
+\end{enumerate}
+
+\clearpage
+
+\section*{Solutions Part 4}
+\subsection*{Problem 1}
+Suppose the matrix $A$ has an SVD of $A=USV^\top$
+\begin{enumerate}
+    \item[(a)] $A^\top=\left(USV^\top\right)^\top=\left(V^\top\right)^\top S^\top U^\top = V S U^\top$
+    \item[(b)] $A^{-1}=VS^{-1}U^\top$. This follows because \[ A^{-1}A = VS^{-1}U^\top USV^\top=VS^{-1}ISV^\top = VS^{-1}SV^\top = VIV^\top= VV^\top=I\] $A^{-1}$ doesn't exist when there are singular values that equal zero.
+    \item[(c)] $A^\top A=V S U^\top USV^\top=VS^{2}V^\top$
+    \item[(d)] Easy! The PCA of $A$ is the SVD of $A^\top A$. Hence, it is \[ V\Sigma V^\top \] where $\Sigma=S^2$
+    \item[(e)] $A\left(\vec{v}_2+\vec{v}_3\right)= A\vec{v}_2 + A\vec{v}_3=S_2\vec{u}_2 + S_3\vec{u}_3$
+    \item[(f)] $s_1 u_1v_1^\top + s_2 u_2v_2^\top +s_3 u_3v_3^\top +s_4 u_4v_4^\top$
+    \item[(g)] $\vec{u}^\top_2A\vec{v}_3= \begin{bmatrix} 0 \end{bmatrix}$
+\end{enumerate}
+
+\subsection*{Problem 2}
+\begin{enumerate}
+    \item[(a)] Suppose we have matrix $A$. An eigenvector of $A$ is any vector $v$ such that $Av=\lambda v$. An eigenvalue, in this case, is $\lambda$.
+    \item[(b)] Yes. Vectors in the null space are eigenvectors that correspond to the eigenvalue of $\lambda=0$.
+    \item[(c)] The eigenvectors of $A\top A$ are the principal components of $A$ and the right singular vectors of $A\top A$.
+    \item[(d)] Without subtracting the mean, we would not be capturing the true variance in our data.
+\end{enumerate}
+
+
+\end{document}

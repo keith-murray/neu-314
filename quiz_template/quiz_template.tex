@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{mdframed}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+% -----------------------------------------------
+% Gradescope-friendly answer box command
+% Usage: \answerbox{height}
+% -----------------------------------------------
+\newcommand{\answerbox}[1]{%
+  \begin{mdframed}[linewidth=1.2pt, innertopmargin=4pt, innerbottommargin=4pt,
+                   innerleftmargin=4pt, innerrightmargin=4pt,
+                   skipabove=4pt, skipbelow=4pt]
+    \vspace{#1}
+  \end{mdframed}%
+}
+
+% -----------------------------------------------
+% Problem label style
+% -----------------------------------------------
+\newcommand{\problabel}[2]{%
+  \noindent\textbf{(#1)} \hfill \textit{#2}\\[2pt]%
+}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% -----------------------------------------------
+% Header
+% -----------------------------------------------
+\begin{center}
+  {\Large\textbf{Quiz}} \hfill {\large Date: \underline{\hspace{4cm}}}
+\end{center}
+
+\vspace{6pt}
+
+\noindent
+\begin{tabular}{@{}p{0.55\linewidth} p{0.38\linewidth}@{}}
+  \textbf{Name:} \hrulefill & \textbf{NetID:} \hrulefill \\[6pt]
+\end{tabular}
+
+\vspace{10pt}
+\hrule height 1.2pt
+\vspace{10pt}
+
+% -----------------------------------------------
+% Answer boxes — one per question
+% -----------------------------------------------
+
+\problabel{1}{1 pt}
+\answerbox{2.0cm}
+
+\vspace{4pt}
+
+\problabel{2}{1 pt}
+\answerbox{2.0cm}
+
+\vspace{4pt}
+
+\problabel{3}{1 pt}
+\answerbox{2.0cm}
+
+\vspace{4pt}
+
+\problabel{4}{1 pt}
+\answerbox{2.0cm}
+
+\clearpage
+
+\problabel{5}{1 pt}
+\answerbox{2.0cm}
+
+\vspace{4pt}
+
+\problabel{6}{1 pt}
+\answerbox{2.0cm}
+
+\end{document}

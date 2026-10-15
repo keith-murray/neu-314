@@ -1,0 +1,159 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,      % Color of internal links (sections, pages)
+    urlcolor=blue,        % Color of web URLs
+    citecolor=green       % Color of citations
+}
+
+% ---- Fill these in ----
+\newcommand{\courseName}{NEU 314}
+\newcommand{\taName}{Keith Murray}
+\newcommand{\sectionInfo}{Precept B01}
+% ------------------------
+
+\title{Precept 4: Warm Up Exercise}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\courseName}
+\chead{\sectionInfo}
+\rhead{\today}
+\cfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{Problem}
+Consider the following two matrices:
+\[
+R=\frac{1}{\sqrt{2}}\begin{bmatrix}
+    1 & 1\\-1 & 1
+\end{bmatrix},\qquad S=\begin{bmatrix}
+    1 & 1\\0 & 1
+\end{bmatrix}
+\]
+Let $\vec{e}_1=\begin{bmatrix}1\\0\end{bmatrix}$ and $\vec{e}_2=\begin{bmatrix}0\\1\end{bmatrix}$.
+\begin{enumerate}
+    \item Compute $R\vec{e}_2$ and $S\vec{e}_2$. How are they related? Now compute $R\vec{e}_1$ and $S\vec{e}_1$. What changed? Now compute $R^2\vec{e}_2$ and $S^2\vec{e}_2$. What would happen if we kept going (i.e. $R^n\vec{e}_2$ and $S^n\vec{e}_2$ for arbitrary $n$)?
+    \item What are the eigenvectors of $R$? What are the eigenvectors of $S$? Try to answer geometrically first. For context, an eigenvector is a vector $\vec{x}$ such that $A\vec{x}=\lambda \vec{x}$
+    \item Let's think about the singular value decomposition (SVD): $A=U\Sigma V^\top$. We will never learn how to compute this, so let's just think about it.
+    \begin{enumerate}
+        \item What would the SVD look like for $R$? \textbf{Hint:} What type of matrix is $R$?
+        \item Imagine feeding every point on the unit circle into $S$. What shape comes out? What do the singular values $\sigma_1\geq\sigma_2$ correspond to in that picture?
+        \item In words, describe what the SVD for $S$ would look like.
+        \item Take a guess at what the determinant of $S$ is.
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Solution}
+\subsection*{Question 1}
+Computing the $R\vec{e}_2$ and $S\vec{e}_2$ gives us
+\[
+R\vec{e}_2=\frac{1}{\sqrt{2}}\begin{bmatrix}1\\1\end{bmatrix},\qquad S\vec{e}_2=\begin{bmatrix}1\\1\end{bmatrix}=\sqrt{2}\,R\vec{e}_2
+\]
+So $S\vec{e}_2$ points in exactly the same direction as $R\vec{e}_2$; it's just $\sqrt{2}$ times longer. If we only ever looked at $\vec{e}_2$, we might think that $S$ is a scaled version of $R$. But this is just a coincidence! Looking at $R\vec{e}_1$ and $S\vec{e}_1$, we have
+\[
+R\vec{e}_1=\frac{1}{\sqrt{2}}\begin{bmatrix}1\\-1\end{bmatrix},\qquad S\vec{e}_1=\begin{bmatrix}1\\0\end{bmatrix}=\vec{e}_1
+\]
+By now, it should be clear that $R$ is a rotation of $45^\circ$ clockwise. However, $S$ didn't rotate $\vec{e}_1$, it just outputted $\vec{e}_1$ again. What's going on with $S$?
+
+Applying the matrices again to $\vec{e}_2$ we find
+\[
+R^2\vec{e}_2=\begin{bmatrix}1\\0\end{bmatrix},\qquad S^2\vec{e}_2=S\begin{bmatrix}1\\1\end{bmatrix}=\begin{bmatrix}2\\1\end{bmatrix}
+\]
+$R$ has now turned $\vec{e}_2$ by a total of $90^\circ$. But $S^2\vec{e}_2$ is only about $63^\circ$ from vertical, not $90^\circ$. In general,
+\[
+S^n=\begin{bmatrix}1 & n\\0 & 1\end{bmatrix},\qquad S^n\vec{e}_2=\begin{bmatrix}n\\1\end{bmatrix}
+\]
+If we keep applying $R$, the vector keeps going around the circle, with 8 applications taking us back to where we started $R^8=I$. If we keep applying $S$, the vector just gets longer and longer, and it leans closer and closer to the horizontal axis without ever crossing it. The matrix $S$ is what we call a \textit{shear} matrix.
+
+\subsection*{Question 2}
+Geometrically, an eigenvector is a vector that stays on its own line after being transformed. $R$ turns every vector by $45^\circ$, so no vector stays on its own line. Hence $R$ has \emph{no} real eigenvectors. (Algebraically, the eigenvalues of $R$ are complex, which we will ignore in this class.)
+
+For $S$, we saw before that $\vec{e}_1$ did not get transformed. Hence,
+\[
+S\begin{bmatrix}1\\0\end{bmatrix}=1\cdot\begin{bmatrix}1\\0\end{bmatrix}
+\]
+and $\vec{e}_1$ is an eigenvector with eigenvalue $1$. Is there another one? 
+
+For $\vec{v}=\begin{bmatrix}x & y\end{bmatrix}^\top$, the equation $S\vec{v}=\lambda\vec{v}$ gives us
+\[
+S\vec{v} = \begin{bmatrix}
+    1 & 1\\0 & 1
+\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix} = \begin{bmatrix}x+y\\y\end{bmatrix} = \begin{bmatrix}\lambda x\\ \lambda y\end{bmatrix} = \lambda\vec{v}
+\]
+where we now have the following system of equations
+\[
+x+y=\lambda x\qquad \text{and}\qquad y=\lambda y
+\]
+Either $y=0$ (giving $\vec{e}_1$ again), or $\lambda=1$, which forces $x+y=x$ and hence $y=0$, which contradicts $y\neq 0$. Therefore, $S$ has exactly one eigenvector (up to scaling). This is also why repeated application of $S$ pushed our vector toward the horizontal axis in Question 1.
+
+\subsection*{Question 3}
+
+\subsubsection*{Part (a)}
+A rotation is already a rotation! So we can take $U=R$, $V^\top=I$, and $\Sigma=I$ to get
+\[
+R = RII = U\Sigma V^\top
+\]
+Notice that both singular values are $1$. Since rotations preserve the norm of input vectors, no direction is scaled.
+
+\subsubsection*{Part (b)}
+The unit circle gets mapped to a tilted ellipse. The singular values are the lengths of the \href{https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes}{semi-axes of the ellipse}: 
+\begin{itemize}
+    \item $\sigma_1$ is how far the longest direction is stretched
+    \item $\sigma_2$ is how much the shortest direction is squeezed
+\end{itemize}
+Also note that:
+\begin{itemize}
+    \item The columns of $U$ point along the axes of the ellipse
+    \item For a rotation the ellipse is just the same circle, which is why $\sigma_1=\sigma_2=1$.
+\end{itemize}
+
+\subsubsection*{Part (c)}
+As we did in \textbf{Part (b)}, imagine the input was a circle. Here is the procedure, reading $U\Sigma V^\top$ from right to left:
+\begin{enumerate}
+    \item Rotate the circle clockwise (this is $V^\top$)
+    \item Stretch along the $x$ axis by $\sigma_1>1$ and squeeze along the $y$ axis by $\sigma_2<1$ to transform the circle into an ellipse (this is $\Sigma$)
+    \item Rotate again, counterclockwise, to tilt the ellipse into its final position (this is $U$) 
+\end{enumerate}
+Even though the shear looks nothing like a rotation, it can be built out of two rotations and a stretch!
+
+For the curious, the exact singular values are
+\[
+\sigma_1=\frac{1+\sqrt{5}}{2}\approx 1.618,\qquad \sigma_2=\frac{\sqrt{5}-1}{2}\approx 0.618
+\]
+where $\sigma_1$ is the golden ratio, and the SVD looks like
+\[
+S\approx\underbrace{\begin{bmatrix}0.851 & -0.526\\0.526 & 0.851\end{bmatrix}}_{U:\ \text{rotate } 31.7^\circ\text{ counterclockwise}}\underbrace{\begin{bmatrix}1.618 & 0\\0 & 0.618\end{bmatrix}}_{\Sigma}\underbrace{\begin{bmatrix}0.526 & 0.851\\-0.851 & 0.526\end{bmatrix}}_{V^\top:\ \text{rotate } 58.3^\circ\text{ clockwise}}
+\]
+
+\subsubsection*{Part (d)}
+Notice that
+\[
+\sigma_1>1>\sigma_2
+\]
+which looks like 
+\[
+\sigma_1\cdot \sigma_2 \approx 1
+\]
+implying that 
+\[
+\det \lvert S\rvert = 1
+\]
+In fact, it is indeed the case that the determinant of $S$ is 1! We can show this via the exact singular values we noted above
+\[
+\frac{1+\sqrt{5}}{2}\frac{\sqrt{5}-1}{2} = \frac{-1 + \sqrt{5}-\sqrt{5}+ 5}{4}= \frac{4}{4}=1
+\]
+The determinant being equal to 1 implies that $S$ is volume preserving.
+
+
+\end{document}

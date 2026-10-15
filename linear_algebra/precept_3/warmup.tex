@@ -1,0 +1,95 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+
+% ---- Fill these in ----
+\newcommand{\courseName}{NEU 314}
+\newcommand{\taName}{Keith Murray}
+\newcommand{\sectionInfo}{Precept B01}
+% ------------------------
+
+\title{Precept 3: Warm Up Exercise}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\courseName}
+\chead{\sectionInfo}
+\rhead{\today}
+\cfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{Problem}
+Let $U$ denote the vector space spanned by vectors $\vec{u}_1,\vec{u}_2$ where
+\[
+\vec{u}_1=\begin{bmatrix}
+    1\\1\\0\\0
+\end{bmatrix},\qquad \vec{u}_2=\begin{bmatrix}
+    0\\0\\1\\1
+\end{bmatrix}
+\]
+Note that $U$ is a subspace of $\mathbb{R}^4$. For each of the following subspaces $W$, find the dimension of the intersection of $U$ and $W$ (denoted as $U\cap W$) and give a geometric description of the intersection.
+\begin{enumerate}
+    \item $W$ as the subspace spanned by $\vec{w}_1=\begin{bmatrix}
+    1\\1\\1\\1
+\end{bmatrix},\qquad \vec{w}_2=\begin{bmatrix}
+    1\\1\\-1\\-1
+\end{bmatrix}$
+    \item $W$ as the subspace spanned by $\vec{w}_1=\begin{bmatrix}
+    1\\1\\1\\1
+\end{bmatrix},\qquad \vec{w}_2=\begin{bmatrix}
+    0\\1\\0\\0
+\end{bmatrix}$
+    \item $W$ as the subspace spanned by $\vec{w}_1=\begin{bmatrix}
+    1\\-1\\0\\0
+\end{bmatrix},\qquad \vec{w}_2=\begin{bmatrix}
+    0\\0\\1\\-1
+\end{bmatrix}$
+\end{enumerate}
+
+\section*{Solution}
+\subsection*{Question 1}
+By inspection, it's easy to see that 
+\[
+\vec{w}_1 = \vec{u}_1 + \vec{u}_2
+\]
+and 
+\[
+\vec{w}_2 = \vec{u}_1 - \vec{u}_2
+\]
+Since $\vec{w}_1$ and $\vec{w}_2$ are both linear combinations of $\vec{u}_1$ and $\vec{u}_2$, then $U$ and $W$ are the same subspace. Hence, the dimension of their intersection is just the dimension of $U$.
+
+Since $U$ is described by two linearly independent vectors, the dimension is 2. Geometrically, this is a plane.
+
+\subsection*{Question 2}
+As we saw before, $\vec{w}_1$ is in $U$ since
+\[
+\vec{w}_1 = \vec{u}_1 + \vec{u}_2
+\]
+But is $\vec{w}_2$ in the span of $\vec{u}_1,\vec{u}_2$? No! To show this, we can project $\vec{w}_2$ on to $\vec{u}_1$ and $\vec{u}_2$. Note that $\vec{u}_1\cdot \vec{u}_2=0$, we can simply write 
+\[
+\operatorname{proj}_{\vec{u}_1}\vec{w}_2 + \operatorname{proj}_{\vec{u}_2}\vec{w}_2 = \frac{1}{2}\vec{u}_1 + 0\cdot \vec{u}_2= \begin{bmatrix}
+    1/2\\1/2\\0\\0
+\end{bmatrix}\neq \vec{w}_2
+\]
+Because we didn't back our original $\vec{w}_2$ vector, we know $\vec{w}_2$ is not in the span of $\vec{u}_1,\vec{u}_2$.
+
+Because $\vec{w}_1$ is the only vector in $U\cap W$, the dimension of the intersection is 1. Geometrically, this corresponds to a line.
+
+\subsection*{Question 3}
+It should be clear that neither $\vec{w}_1$ nor $\vec{w}_2$ is in $U$. To show this, we can just take the dot product of $\vec{w}_1,\vec{w}_2$ with $\vec{u}_1,\vec{u}_2$. Starting with $\vec{w}_1$, we can write 
+\[
+\vec{w}_1\cdot \vec{u}_1 = \vec{0},\qquad \vec{w}_1\cdot \vec{u}_2 = \vec{0}
+\]
+and
+\[
+\vec{w}_2\cdot \vec{u}_1 = \vec{0},\qquad \vec{w}_2\cdot \vec{u}_2 = \vec{0}
+\]
+Hence, $U$ and $W$ are orthogonal to each other. And yes! Subspaces can be orthogonal to each other just like vectors are orthogonal to each other. But is the intersection empty? No! Remember that all subspaces contain the origin $\vec{0}$, hence the intersection of $U$ and $W$ is just $\vec{0}$. Geometrically, this corresponds to a point.
+
+\end{document}

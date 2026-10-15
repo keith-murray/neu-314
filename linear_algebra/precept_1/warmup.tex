@@ -1,0 +1,71 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+
+% ---- Fill these in ----
+\newcommand{\courseName}{NEU 314}
+\newcommand{\taName}{Keith Murray}
+\newcommand{\sectionInfo}{Precept B01}
+% ------------------------
+
+\title{Precept 1: Warm Up Exercise}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\courseName}
+\chead{\sectionInfo}
+\rhead{\today}
+\cfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{Problem}
+
+Earlier in class we defined the projection of a vector $\vec{v}$ on to $\vec{u}$ as
+\begin{equation}
+\label{eq:projection}
+\operatorname{proj}_{\vec{u}}\left(\vec{v}\right)=\frac{\vec{v}\cdot \vec{u}}{\vec{u}\cdot \vec{u}}\vec{u}
+\end{equation}
+But really, we don't need to define it, we can derive it!
+
+Derive the formula for $\operatorname{proj}_{\vec{u}}\left(\vec{v}\right)$ using vector addition, scalar multiplication, the dot product, orthogonality.
+
+\noindent\textbf{Hint:} The following expressions will be helpful:
+\[
+\left(\vec{x}+\vec{y}\right)\cdot \vec{z}=\vec{x}\cdot \vec{z} + \vec{y}\cdot \vec{z} \qquad \text{and} \qquad \left(c\vec{x}\right)\cdot\vec{y}=c\left(\vec{x}\cdot\vec{y}\right)
+\]
+where $c$ is a scalar.
+
+\section*{Solution}
+
+We want to decompose $\vec{v}$ into
+\begin{equation}
+\label{eq:decomposition}
+\vec{v} = c\vec{u} + \vec{w}
+\end{equation}
+where $\vec{u}$ and $\vec{w}$ are orthogonal
+\[
+\vec{u}\cdot \vec{w} = 0
+\]
+Our task is to find the coefficient $c$. By taking the dot product with $\vec{u}$ on either side of (\ref{eq:decomposition}), we can write
+\begin{align*}
+\vec{v}\cdot\vec{u} &= \left(c\vec{u} + \vec{w}\right)\cdot \vec{u}\\
+&= \left(c\vec{u}\right)\cdot \vec{u} + \vec{w}\cdot \vec{u}\\
+&= c\left(\vec{u} \cdot \vec{u}\right) + \vec{w}\cdot \vec{u}
+\end{align*}
+Notice that $\vec{w}\cdot \vec{u}=0$ by construction and we can rearrange things to write
+\[
+c=\frac{\vec{v}\cdot\vec{u}}{\vec{u} \cdot \vec{u}}
+\]
+where our projection vector is now
+\[
+c\vec{u} = \frac{\vec{v}\cdot\vec{u}}{\vec{u} \cdot \vec{u}}\vec{u}
+\]
+which was to be shown.
+
+\end{document}
