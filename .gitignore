@@ -11,3 +11,11 @@ wheels/
 
 # Mac files
 .DS_Store
+
+# Latex files
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.log
