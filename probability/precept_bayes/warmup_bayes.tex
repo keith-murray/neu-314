@@ -11,6 +11,8 @@
     citecolor=green
 }
 
+\newcommand{\E}{\mathbb{E}}
+
 % ---- Fill these in ----
 \newcommand{\courseName}{NEU 314}
 \newcommand{\taName}{Keith Murray}
@@ -33,21 +35,25 @@
 \thispagestyle{fancy}
 
 \section*{Problems}
-Remember from earlier today Bayes' rule
+As a reminder, here is Bayes' rule
 \[
 P(x\mid y) = \frac{P(y\mid x)P(x)}{P(y)}
 \]
+and to compute $P(y)$, we can use marginalization and conditionalization to write
+\[
+P(y) = \sum_x P(x,y) = \sum_x P(y\mid x) P(x)
+\]
 
 \begin{enumerate}
-    \item \textbf{The positive test.} A rare condition affects $1\%$ of the population. A test for it comes back positive $99\%$ of the time when someone has the condition, and gives a false positive $5\%$ of the time when someone does not.
-    \begin{enumerate}
-        \item You take the test and it comes back positive. What is the probability that you actually have the condition?
-    \end{enumerate}
-
     \item \textbf{The trick coin.} A bag holds two coins. One is fair, and the other has heads on both sides. You pull a coin out at random and flip it.
     \begin{enumerate}
         \item It lands heads. What is the probability that you pulled out the two-headed coin?
         \item You flip the same coin again and it lands heads again. What is the probability now?
+    \end{enumerate}
+
+    \item \textbf{The positive test.} A rare condition affects $1\%$ of the population. A test for it comes back positive $99\%$ of the time when someone has the condition, and gives a false positive $5\%$ of the time when someone does not.
+    \begin{enumerate}
+        \item You take the test and it comes back positive. What is the probability that you actually have the condition?
     \end{enumerate}
 
     \item \textbf{The two-child puzzle.} A family has two children. Assume each child is equally likely to be a girl or a boy, independently of the other.
@@ -55,12 +61,39 @@ P(x\mid y) = \frac{P(y\mid x)P(x)}{P(y)}
         \item You learn that \emph{at least one} of the children is a girl. What is the probability that both are girls?
         \item Instead, you learn that the \emph{older} child is a girl. What is the probability that both are girls?
     \end{enumerate}
+
+    \item \textbf{Rewriting variance.} We saw that the formula for variance is $\E\big[(x-\E[x])^2\big]$. This is a bit cumbersome. To make our lives easier, show that \[ \E\big[(x-\E[x])^2\big]=\E\big[x^2 \big] - \E\big[x\big]^2 \] (\textit{Hint:} Think back to the properties of linear functions. Is the expectation linear? (\textit{Another hint:} It is!))
 \end{enumerate}
 
 \newpage
 \section*{Solution}
 
 \subsection*{Question 1}
+Let $T$ be ``two-headed coin'' and $F$ be ``fair coin,'' so $P(T)=P(F)=\tfrac{1}{2}$, with $P(H\mid T)=1$ and $P(H\mid F)=\tfrac{1}{2}$.
+
+\subsubsection*{Part (a)}
+This is just Bayes' rule!
+\[
+P(T\mid H)=\frac{P(H\mid T)P(T)}{P(H)}
+\]
+To compute $P(H)$, we can use marginalization and the product rule to get
+\[
+P(H)=P(H\mid T)P(T)+P(H\mid F)P(F)=(1)\left(\tfrac{1}{2}\right)+\left(\tfrac{1}{2}\right)\left(\tfrac{1}{2}\right)=\tfrac{3}{4}
+\]
+so that
+\[
+P(T\mid H)=\frac{P(H\mid T)P(T)}{P(H)}=\frac{1/2}{3/4}=\frac{2}{3}
+\]
+
+\subsubsection*{Part (b)}
+Given the coin, the flips are independent, so $P(HH\mid T)=1$ and $P(HH\mid F)=\tfrac{1}{4}$. Then
+\[
+P(T\mid HH)=\frac{(1)\left(\tfrac{1}{2}\right)}{(1)\left(\tfrac{1}{2}\right)+\left(\tfrac{1}{4}\right)\left(\tfrac{1}{2}\right)}=\frac{1/2}{5/8}=\frac{4}{5}
+\]
+Each head makes us more confident in the two-headed coin. Notice that a single tails would immediately drop $P(T)$ to $0$.
+
+
+\subsection*{Question 2}
 Let $C$ mean ``has the condition'' and $\bar{C}$ mean ``does not.'' We are given
 \[
 P(C)=0.01,\qquad P(+\mid C)=0.99,\qquad P(+\mid \bar{C})=0.05
@@ -80,30 +113,6 @@ Therefore, we can write
 P(D\mid +)=\frac{0.0099}{0.0594}=\frac{1}{6}\approx 0.17
 \]
 Funny how that's not 99\%, right?
-
-\subsection*{Question 2}
-Let $T$ be ``two-headed coin'' and $F$ be ``fair coin,'' so $P(T)=P(F)=\tfrac{1}{2}$, with $P(H\mid T)=1$ and $P(H\mid F)=\tfrac{1}{2}$.
-
-\subsubsection*{Part (a)}
-This is just Bayes' rule again!
-\[
-P(T\mid H)=\frac{P(H\mid T)P(T)}{P(H)}
-\]
-To compute $P(H)$, we can use marginalization and the product rule to get
-\[
-P(H)=P(H\mid T)P(T)+P(H\mid F)P(F)=(1)\left(\tfrac{1}{2}\right)+\left(\tfrac{1}{2}\right)\left(\tfrac{1}{2}\right)=\tfrac{3}{4}
-\]
-so that
-\[
-P(T\mid H)=\frac{P(H\mid T)P(T)}{P(H)}=\frac{1/2}{3/4}=\frac{2}{3}
-\]
-
-\subsubsection*{Part (b)}
-Given the coin, the flips are independent, so $P(HH\mid T)=1$ and $P(HH\mid F)=\tfrac{1}{4}$. Then
-\[
-P(T\mid HH)=\frac{(1)\left(\tfrac{1}{2}\right)}{(1)\left(\tfrac{1}{2}\right)+\left(\tfrac{1}{4}\right)\left(\tfrac{1}{2}\right)}=\frac{1/2}{5/8}=\frac{4}{5}
-\]
-Each head makes us more confident in the two-headed coin. Notice that a single tails would immediately drop $P(T)$ to $0$.
 
 \subsection*{Question 3}
 Listing the children as (older, younger), the four outcomes $GG$, $GB$, $BG$, $BB$ each have probability $\tfrac{1}{4}$.
@@ -125,5 +134,16 @@ P(GG\mid \text{at least one } G)=\frac{P(\text{at least one } G\mid GG)\cdot P(G
 
 \subsubsection*{Part (b)}
 We can intuitively reason about this one. Since the ``older child is a girl'', there are two possible states of the world $\{GG,GB\}$. Given they are both equal probability, the probability that both children are girls is $\frac{1}{2}$.
+
+\subsection*{Question 4}
+Following the hint, the expectation is linear! Hence, we can do the following:
+\begin{align*}
+    \E\big[(x-\E[x])^2\big] &= \E\big[ x^2 -2x\E\big[x\big] + \E\big[x\big]^2 \big]\\
+    &=\E\big[x^2\big] - \E\big[2x\E\big[x\big]\big] + \E\big[\E \big[ x \big]^2\big]\\
+    &= \E\big[x^2\big] - 2 \E\big[x\big]\E\big[x\big] + \E\big[x\big]^2\\
+    &= \E\big[x^2\big] - 2 \E\big[x\big]^2 + \E\big[x\big]^2\\
+    &= \E\big[x^2\big] - \E\big[x\big]^2
+\end{align*}
+
 
 \end{document}
