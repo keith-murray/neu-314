@@ -69,28 +69,28 @@ P(y) = \sum_x P(x,y) = \sum_x P(y\mid x) P(x)
 \section*{Solution}
 
 \subsection*{Question 1}
-Let $T$ be ``two-headed coin'' and $F$ be ``fair coin,'' so $P(T)=P(F)=\tfrac{1}{2}$, with $P(H\mid T)=1$ and $P(H\mid F)=\tfrac{1}{2}$.
+Let $U$ be ``two-headed coin'' (it's $U$ for ``Unfair'') and $F$ be ``fair coin,'' so $P(U)=P(F)=\tfrac{1}{2}$, with $P(H\mid U)=1$ and $P(H\mid F)=\tfrac{1}{2}$.
 
 \subsubsection*{Part (a)}
 This is just Bayes' rule!
 \[
-P(T\mid H)=\frac{P(H\mid T)P(T)}{P(H)}
+P(U\mid H)=\frac{P(H\mid U)P(U)}{P(H)}
 \]
 To compute $P(H)$, we can use marginalization and the product rule to get
 \[
-P(H)=P(H\mid T)P(T)+P(H\mid F)P(F)=(1)\left(\tfrac{1}{2}\right)+\left(\tfrac{1}{2}\right)\left(\tfrac{1}{2}\right)=\tfrac{3}{4}
+P(H)=P(H\mid U)P(U)+P(H\mid F)P(F)=(1)\left(\tfrac{1}{2}\right)+\left(\tfrac{1}{2}\right)\left(\tfrac{1}{2}\right)=\tfrac{3}{4}
 \]
 so that
 \[
-P(T\mid H)=\frac{P(H\mid T)P(T)}{P(H)}=\frac{1/2}{3/4}=\frac{2}{3}
+P(U\mid H)=\frac{P(H\mid U)P(U)}{P(H)}=\frac{1/2}{3/4}=\frac{2}{3}
 \]
 
 \subsubsection*{Part (b)}
-Given the coin, the flips are independent, so $P(HH\mid T)=1$ and $P(HH\mid F)=\tfrac{1}{4}$. Then
+Given the coin, the flips are independent, so $P(HH\mid U)=1$ and $P(HH\mid F)=\tfrac{1}{4}$. Then
 \[
-P(T\mid HH)=\frac{(1)\left(\tfrac{1}{2}\right)}{(1)\left(\tfrac{1}{2}\right)+\left(\tfrac{1}{4}\right)\left(\tfrac{1}{2}\right)}=\frac{1/2}{5/8}=\frac{4}{5}
+P(U\mid HH)=\frac{(1)\left(\tfrac{1}{2}\right)}{(1)\left(\tfrac{1}{2}\right)+\left(\tfrac{1}{4}\right)\left(\tfrac{1}{2}\right)}=\frac{1/2}{5/8}=\frac{4}{5}
 \]
-Each head makes us more confident in the two-headed coin. Notice that a single tails would immediately drop $P(T)$ to $0$.
+Each head makes us more confident in the two-headed coin. Notice that a single tails would  immediately drop $P(U)$ to $0$.
 
 
 \subsection*{Question 2}
@@ -110,7 +110,7 @@ P(+)=P(+,D)+P(+,\bar{D})=P(+\mid D)P(D)+P(+\mid\bar{D})P(\bar{D})=(0.99)(0.01)+(
 \]
 Therefore, we can write
 \[
-P(D\mid +)=\frac{0.0099}{0.0594}=\frac{1}{6}\approx 0.17
+P(D\mid +)=\frac{0.0099}{0.0594}\approx 0.17
 \]
 Funny how that's not 99\%, right?
 
