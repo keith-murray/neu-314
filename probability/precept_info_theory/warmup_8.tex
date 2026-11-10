@@ -1,0 +1,80 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{array}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=green
+}
+
+% ---- Fill these in ----
+\newcommand{\courseName}{NEU 314}
+\newcommand{\taName}{Keith Murray}
+\newcommand{\sectionInfo}{Precept B01}
+% ------------------------
+
+\newcommand{\E}{\mathbb{E}}
+
+\title{Precept 6: Information Theory}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\courseName}
+\chead{\sectionInfo}
+\rhead{\today}
+\cfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{Problem}
+\begin{enumerate}
+    \item The table below gives the joint probability distribution for random variables $X$ and $Y$
+    \[
+    \begin{array}{c|cc}
+    P(X,Y) & Y=0 & Y=1 \\ \hline
+    X=0 & 1/2 & 1/4 \\
+    X=1 & 0 & 1/4
+    \end{array}
+    \]
+    \begin{enumerate}
+        \item Compute the marginal distributions $P(X)$ and $P(Y)$.
+        \item Compute the conditional probability table $P(X\mid Y)$.
+        \item Compute $H(X\mid Y)$ using \[ H(X\mid Y)=-\sum_{x,y}P(x,y)\log_2 P(x\mid y) \]
+        \item Now compute the conditional probability table $P(Y\mid X)$ and use it to find $H(Y\mid X)$.
+        \item Is $H(X\mid Y)=H(Y\mid X)$?
+    \end{enumerate}
+ 
+    \item You have 12 identical-looking coins. One is fake, and it's either ever so slightly heavier or lighter than the rest. You don't know which.
+    \begin{enumerate}
+        \item How many possible ``states of the world'' are there?
+        \item How many questions should you expect to ask to figure out which coin is heaviest?
+    \end{enumerate}
+
+    \item Remember the chain rule for probabilities from last time? \[ P(x,y)=P(x\mid y)P(y) \] Pretty cool right? There is also a chain rule for entropy \[ H(X,Y) = H(X|Y) + H(Y) \]
+    \begin{enumerate}
+        \item Prove it. (\textit{Hint:} The definition of entropy is $H(X) = -\mathbb{E}\left[\log P(X)\right]$)
+        \item Use the chain rule for entropy to show mutual information is symmetric \[I(X;Y)=I(Y;X)\]
+    \end{enumerate}
+\end{enumerate}
+\newpage
+\section*{Solution}
+
+\subsection*{Question 1}
+
+
+\subsection*{Question 2}
+
+
+\subsection*{Question 3}
+
+
+\end{document}
