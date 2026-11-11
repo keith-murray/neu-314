@@ -20,7 +20,7 @@
 
 \newcommand{\E}{\mathbb{E}}
 
-\title{Precept 6: Information Theory}
+\title{Precept 8: Information Theory}
 \date{\today}
 
 \pagestyle{fancy}
@@ -56,7 +56,7 @@
     \item You have 12 identical-looking coins. One is fake, and it's either ever so slightly heavier or lighter than the rest. You don't know which.
     \begin{enumerate}
         \item How many possible ``states of the world'' are there?
-        \item How many questions should you expect to ask to figure out which coin is heaviest?
+        \item How many questions should you expect to ask to figure out which coin is fake and whether it is heavier or lighter than the rest?
     \end{enumerate}
 
     \item Remember the chain rule for probabilities from last time? \[ P(x,y)=P(x\mid y)P(y) \] Pretty cool right? There is also a chain rule for entropy \[ H(X,Y) = H(X|Y) + H(Y) \]
@@ -73,8 +73,53 @@
 
 \subsection*{Question 2}
 
+\subsubsection*{Part (a)}
+
+Well, there are 12 coins and one is the fake, so given that each coin could be the fake one, we could say there are 12 possible states of the world. But! Remember the fake coin can either be heavier or lighter, so there are 2 possible states of the fake coin. Hence, $12\times2=24$ and there are 24 possible states of the world.
+
+\subsubsection*{Part (b)}
+
+This question is just asking about the entropy of the problem. Let's assume that each of the 24 states are equally probable. Then it becomes
+\[
+-\sum_{i=1}^{24} P(x_i)\log_2 P(x_i) = 24 \cdot \left(\frac{1}{24}\log_2 24\right)= \log_2 24 = 4.58
+\]
+So on average, we can expect to ask 4.58 questions to figure out which coin is the fake coin, and what its relative weight is.
 
 \subsection*{Question 3}
 
+\subsubsection*{Part (a)}
+
+Notice how the ``chain rule'' for probabilities shares the same name as the ``chain rule'' for entropy. Given this observation, let's start by writing the chain rule of $X,Y$:
+\begin{align*}
+    P(X,Y) &= P(X\mid Y)P(Y)\\
+    \log_2 P(X,Y) &= \log_2 \left[P(X\mid Y)P(Y)\right]\\
+    \log_2 P(X,Y) &= \log_2 P(X\mid Y) + \log_2 P(Y) \quad \text{This is the trick!}\\
+    \mathbb{E}\big[ \log_2 P(X,Y) \big] &= \mathbb{E}\big[\log_2 P(X\mid Y) + \log_2 P(Y)\big]\\
+    \mathbb{E}\big[ \log_2 P(X,Y) \big] &= \mathbb{E}\big[\log_2 P(X\mid Y)\big] + \mathbb{E}\big[\log_2 P(Y)\big] \quad \text{Expectations are linear functions!}\\
+    -\mathbb{E}\big[ \log_2 P(X,Y) \big] &= -\mathbb{E}\big[\log_2 P(X\mid Y)\big] - \mathbb{E}\big[\log_2 P(Y)\big]\\
+    H(X,Y) &= H(X\mid Y) + H(Y)
+\end{align*}
+
+\subsubsection*{Part (b)}
+
+Before we can start, let's note that we can write the chain rule for entropy two ways:
+\begin{align*}
+    H(X,Y) &= H(X\mid Y) + H(Y)\\
+    &= H(Y\mid X) + H(X)
+\end{align*}
+this follows from the chain rule for probabilities 
+\[
+P(X\mid Y)P(Y) = P(X,Y) = P(Y\mid X)P(X)
+\]
+Now, given our two representations of the chain rule, we can write 
+\begin{align*}
+    I(X;Y) &= H(X) - H(X\mid Y)\\
+    &= H(X) - \big[ H(X,Y) - H(Y) \big] \qquad \text{The chain rule!}\\
+    &= H(X) - H(X,Y) + H(Y)\\
+    &= H(Y) - \big[ H(X,Y) - H(Y) \big]\\
+    &= H(Y) - H(Y\mid X) \qquad \text{The chain rule again!}\\
+    &= I(Y;X)
+\end{align*}
+If that's not awesome, then what is?
 
 \end{document}
