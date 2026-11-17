@@ -1,0 +1,96 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=green
+}
+
+% ---- Fill these in ----
+\newcommand{\courseName}{NEU 314}
+\newcommand{\taName}{Keith Murray}
+\newcommand{\sectionInfo}{Precept B01}
+% ------------------------
+
+\title{Precept: Bias and Variance of an Estimator}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\courseName}
+\chead{\sectionInfo}
+\rhead{\today}
+\cfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{Problem}
+Recall the two properties of an estimator $\hat{\theta}$ from lecture, where the expectation $\mathbb{E}$ is an average over draws of the dataset $m$:
+\[
+\textbf{Bias: } b(\theta)=\mathbb{E}[\hat{\theta}]-\theta
+\qquad\qquad
+\textbf{Variance: } \mathrm{var}(\theta)=\mathbb{E}\Big[\big(\hat{\theta}-\mathbb{E}[\hat{\theta}]\big)^2\Big]
+\]
+In lecture we saw that the estimator $\hat{\theta}(m)=7$, which ignores the data entirely, has variance $0$ and bias $7-\theta$. Now let's look at an estimator that actually uses the data.
+
+\begin{enumerate}
+    \item \textbf{The single-trial estimator.} You present the same stimulus to a neuron on $n$ trials and record the spike counts $m=\{r_1, r_2, \ldots, r_n\}$. The trials are independent, and each spike count has mean $\theta$ and variance $\sigma^2$:
+    \[
+    \mathbb{E}[r_i]=\theta, \qquad \mathrm{Var}(r_i)=\sigma^2 \qquad \text{for every } i
+    \]
+    A lazy experimenter decides to estimate $\theta$ using only the first trial:
+    \[
+    \hat{\theta}(m)=r_1
+    \]
+    \begin{enumerate}
+        \item What is the bias of this estimator? Is it unbiased?
+        \item What is the variance of this estimator?
+        \item The experimenter records $n=1000$ trials instead of $n=10$. How do the bias and variance of $\hat{\theta}=r_1$ change? What does this tell you about the estimator?
+        \item Compare $\hat{\theta}=r_1$ to the constant estimator $\hat{\theta}=7$. Each one gets one property ``right.'' Which property does each get right, and what does each give up?
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+\section*{Solution}
+
+\subsection*{Part (a)}
+The expected value of the estimator is just the expected value of the first spike count:
+\[
+\mathbb{E}[\hat{\theta}]=\mathbb{E}[r_1]=\theta
+\]
+so the bias is
+\[
+b(\theta)=\mathbb{E}[\hat{\theta}]-\theta=\theta-\theta=0
+\]
+The estimator is unbiased, for \emph{every} value of $\theta$. On average over many repeated experiments, the first trial lands right on the true mean.
+
+\subsection*{Part (b)}
+Using $\mathbb{E}[\hat{\theta}]=\theta$ from Part (a),
+\[
+\mathrm{var}(\theta)=\mathbb{E}\Big[\big(\hat{\theta}-\mathbb{E}[\hat{\theta}]\big)^2\Big]=\mathbb{E}\big[(r_1-\theta)^2\big]=\sigma^2
+\]
+The last step is just the definition of the variance of $r_1$. The estimator is exactly as noisy as a single spike count.
+
+\subsection*{Part (c)}
+Nothing changes! The bias is still $0$ and the variance is still $\sigma^2$, because the estimator never looks at $r_2, \ldots, r_n$. The experimenter paid for 999 extra trials and threw all of them away. Being unbiased does not make an estimator good: a better estimator should get more precise as we collect more data. (For example, the sample mean $\bar{r}=\frac{1}{n}\sum_i r_i$ is also unbiased, but its variance is $\sigma^2/n$, which shrinks as $n$ grows.)
+
+\subsection*{Part (d)}
+\begin{center}
+\begin{tabular}{lcc}
+ & Bias & Variance \\
+\hline
+$\hat{\theta}=7$ & $7-\theta$ & $0$ \\
+$\hat{\theta}=r_1$ & $0$ & $\sigma^2$
+\end{tabular}
+\end{center}
+The constant estimator gets the variance right: it gives the same answer every time, so it has no variance at all. But it ignores the data, so it is biased unless the true value happens to be exactly $7$. The single-trial estimator gets the bias right: it is centered on the truth. But it inherits all of the trial-to-trial noise of one spike count. Bias and variance are separate properties, and an estimator can do well on one while doing poorly on the other.
+
+\end{document}
