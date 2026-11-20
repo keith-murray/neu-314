@@ -19,3 +19,6 @@ wheels/
 *.out
 *.synctex.gz
 *.log
+
+# Project specific files
+homework/
